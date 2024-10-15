@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 )
@@ -48,6 +49,7 @@ func move(state GameState) BattlesnakeMoveResponse {
 	boardWidth := state.Board.Width
 	boardHeight := state.Board.Height
 
+	fmt.Printf("%+v/n", myHead)
 	if myNeck.X < myHead.X && myHead.X == 0 { // Neck is left of head, don't move left
 		isMoveSafe["left"] = false
 	} else if myNeck.X > myHead.X && myHead.X == boardWidth { // Neck is right of head, don't move right
