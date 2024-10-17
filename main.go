@@ -77,6 +77,7 @@ func move(state GameState) BattlesnakeMoveResponse {
 		}
 	}
 
+	fmt.Println(safeMoves)
 	if len(safeMoves) == 0 {
 		log.Printf("MOVE %d: No safe moves detected! Moving down\n", state.Turn)
 		return BattlesnakeMoveResponse{Move: "down"}
