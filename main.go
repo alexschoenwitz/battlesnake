@@ -89,8 +89,7 @@ func move(state GameState) BattlesnakeMoveResponse {
 	// food := state.Board.Food
 
 	log.Printf("MOVE %d: %s\n", state.Turn, nextMove)
-	// return BattlesnakeMoveResponse{Move: nextMove}
-	return BattlesnakeMoveResponse{Move: "down"}
+	return BattlesnakeMoveResponse{Move: nextMove}
 }
 
 func main() {
