@@ -84,6 +84,7 @@ func move(state GameState) BattlesnakeMoveResponse {
 		return BattlesnakeMoveResponse{Move: "down"}
 	}
 
+	//
 	// Choose a random move from the safe ones
 	nextMove := safeMoves[rand.Intn(len(safeMoves))]
 
