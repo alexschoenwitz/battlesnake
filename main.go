@@ -41,8 +41,8 @@ func move(state GameState) BattlesnakeMoveResponse {
 		"right": true,
 	}
 
-	for range state.Board.Width {
-	}
+	//for range state.Board.Width {
+	//}
 	// We've included code to prevent your Battlesnake from moving backwards
 	myHead := state.You.Body[0] // Coordinates of your head
 	myNeck := state.You.Body[1] // Coordinates of your "neck"
