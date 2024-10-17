@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -40,8 +39,6 @@ func HandleMove(w http.ResponseWriter, r *http.Request) {
 		log.Printf("ERROR: Failed to decode move json, %s", err)
 		return
 	}
-	b, _ := json.Marshal(state)
-	fmt.Printf("%+v\n", string(b))
 
 	response := move(state)
 
