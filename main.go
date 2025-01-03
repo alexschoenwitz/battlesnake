@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math/rand"
 )
@@ -93,6 +94,57 @@ func move(state GameState) BattlesnakeMoveResponse {
 
 	log.Printf("MOVE %d: %s\n", state.Turn, nextMove)
 	return BattlesnakeMoveResponse{Move: nextMove}
+}
+
+type Case struct {
+	Valid    bool
+	Walkable bool
+	isCase
+}
+
+type isCase interface {
+	Valid() bool
+	String() string
+}
+
+func (c Case) String() string {
+	return c.String()
+}
+
+type SnakePart struct {
+	Snake int
+	Index int
+}
+
+func (p SnakePart) String() string {
+	return fmt.Sprintf("%d_%d", p.Snake, p.Index)
+}
+
+func calcGrid(state GameState) [][]Case {
+	board := make([][]Case, state.Board.Height)
+	for i := range state.Board.Height {
+		board[i] = make([]Case, state.Board.Width)
+	}
+
+	for s, snake := range state.Board.Snakes {
+		for i, coord := range snake.Body {
+			board[coord.X][coord.Y] = Case{
+				Valid:    true,
+				Snake:    s,
+				Index:    i,
+				Walkable: false,
+			}
+		}
+	}
+	for _, hazard := range state.Board.Hazards {
+		board[hazard.X][hazard.Y] = Case{
+			Valid:    true,
+			Snake:    s,
+			Index:    i,
+			Walkable: false,
+		}
+	}
+	return board
 }
 
 func main() {
