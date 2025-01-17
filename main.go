@@ -97,19 +97,18 @@ func move(state GameState) BattlesnakeMoveResponse {
 }
 
 type Case struct {
-	Valid    bool
-	Walkable bool
-	isCase
+	Type      caseType
+	Valid     bool
+	Walkable  bool
+	SnakePart SnakePart
 }
 
-type isCase interface {
-	Valid() bool
-	String() string
-}
+type caseType string
 
-func (c Case) String() string {
-	return c.String()
-}
+const (
+	caseTypeSnake  caseType = "snake"
+	caseTypeHazard caseType = "hazard"
+)
 
 type SnakePart struct {
 	Snake int
@@ -129,18 +128,20 @@ func calcGrid(state GameState) [][]Case {
 	for s, snake := range state.Board.Snakes {
 		for i, coord := range snake.Body {
 			board[coord.X][coord.Y] = Case{
+				Type:     caseTypeSnake,
 				Valid:    true,
-				Snake:    s,
-				Index:    i,
 				Walkable: false,
+				SnakePart: SnakePart{
+					Snake: s,
+					Index: i,
+				},
 			}
 		}
 	}
 	for _, hazard := range state.Board.Hazards {
 		board[hazard.X][hazard.Y] = Case{
+			Type:     caseTypeHazard,
 			Valid:    true,
-			Snake:    s,
-			Index:    i,
 			Walkable: false,
 		}
 	}
