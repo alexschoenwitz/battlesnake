@@ -1,3 +1,3 @@
-module github.com/BattlesnakeOfficial/starter-snake-go
+module github.com/alexschoenwitz/battlesnake
 
 go 1.23.3
